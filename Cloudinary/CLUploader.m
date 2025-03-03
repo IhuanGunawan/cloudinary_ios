@@ -316,7 +316,7 @@
         [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+//    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 //        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n",
 //                           [fileURL lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
 //        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
