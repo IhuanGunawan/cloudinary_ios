@@ -316,7 +316,7 @@
 
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:fileData];
+    [body appendData:file];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
     // Add the final boundary
