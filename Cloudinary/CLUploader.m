@@ -296,8 +296,22 @@
     }
     
     NSString* apiUrl = [_cloudinary cloudinaryApiUrl:action options:options];
+    NSURL *url = [NSURL URLWithString:apiUrl];
+    
 
-    NSURLRequest *req = [self request:apiUrl params:params file:file timeout:[options valueForKey:@"timeout"]];
+    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
+//    params:params file:file timeout:[options valueForKey:@"timeout"]];
+    [req setValue:@"your_custom_value" forHTTPHeaderField:@"X-Custom-Header"];
+//    NSError *error = nil;
+//    NSData *paramsData = [NSJSONSerialization dataWithJSONObject:params options:0 error:&error];
+//    if (error) {
+//        NSLog(@"Error serializing params: %@", error.localizedDescription);
+//    } else {
+//        req.HTTPBody = paramsData;
+//    }
+//    NSURL *fileURL = [NSURL fileURLWithPath:file];  // Example file path
+
+    
     // create the connection with the request and start loading the data
     if ([[_cloudinary get:@"sync" options:options defaultValue:@NO] boolValue]) {
         NSError* nserror = nil;
