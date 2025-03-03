@@ -319,10 +319,11 @@
     // Add file data to the body (example: uploading a file)
     if (fileURL) {
         [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n", [fileURL lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[NSData dataWithContentsOfURL:fileURL]];
-        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"file\"; filename=\"%@\"\r\n",
+//                           [fileURL lastPathComponent]] dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
+//        [body appendData:[NSData dataWithContentsOfURL:fileURL]];
+//        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
     }
 
     // Add the final boundary
