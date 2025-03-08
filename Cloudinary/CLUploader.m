@@ -303,7 +303,7 @@
 //    params:params file:file timeout:[options valueForKey:@"timeout"]];
     
     [req setValue:[params[@"upload_preset"] description] forHTTPHeaderField:@"X-Custom-Header"];
-    [req setValue:@"hello" forHTTPHeaderField:@"X-Custom-Header"];
+//    [req setValue:@"hello" forHTTPHeaderField:@"X-Custom-Header"];
 
     NSString *boundary = @"--871ff282dec35ee80";
     NSMutableData *body = [NSMutableData data];
@@ -327,8 +327,6 @@
     // Set the HTTP body to the created multipart body
     req.HTTPBody = body;
     
-    NSString *string = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-    [req setValue:string forHTTPHeaderField:@"X-Custom-Header"];
 
     // create the connection with the request and start loading the data
     if ([[_cloudinary get:@"sync" options:options defaultValue:@NO] boolValue]) {
