@@ -301,7 +301,8 @@
 
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
 //    params:params file:file timeout:[options valueForKey:@"timeout"]];
-//    [req setValue:@"your_custom_value" forHTTPHeaderField:@"X-Custom-Header"];
+    
+    [req setValue:[params[@"upload_preset"] description] forHTTPHeaderField:@"X-Custom-Header"];
 
     NSString *boundary = @"--871ff282dec35ee80";
     NSMutableData *body = [NSMutableData data];
@@ -316,14 +317,14 @@
 
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:file];
+    [body appendData:file];
     [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
 
     // Add the final boundary
     [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 
     // Set the HTTP body to the created multipart body
-//    req.HTTPBody = body;
+    req.HTTPBody = body;
     
     NSString *string = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
     [req setValue:string forHTTPHeaderField:@"X-Custom-Header"];
