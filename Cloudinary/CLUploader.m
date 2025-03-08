@@ -301,7 +301,7 @@
 
     NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
 //    params:params file:file timeout:[options valueForKey:@"timeout"]];
-    [req setValue:@"your_custom_value" forHTTPHeaderField:@"X-Custom-Header"];
+//    [req setValue:@"your_custom_value" forHTTPHeaderField:@"X-Custom-Header"];
 
     NSString *boundary = @"--871ff282dec35ee80";
     NSMutableData *body = [NSMutableData data];
@@ -326,7 +326,7 @@
 //    req.HTTPBody = body;
     
     NSString *string = [[NSString alloc] initWithData:body encoding:NSUTF8StringEncoding];
-    [req setValue:string forHTTPHeaderField:@"the body"];
+    [req setValue:string forHTTPHeaderField:@"X-Custom-Header"];
 
     // create the connection with the request and start loading the data
     if ([[_cloudinary get:@"sync" options:options defaultValue:@NO] boolValue]) {
