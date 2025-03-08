@@ -298,35 +298,15 @@
     NSString* apiUrl = [_cloudinary cloudinaryApiUrl:action options:options];
     NSURL *url = [NSURL URLWithString:apiUrl];
     
+    // Create the NSURLRequest (assuming this method already exists)
+    NSURLRequest *req = [self request:apiUrl params:params file:file timeout:[options valueForKey:@"timeout"]];
 
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url];
-//    params:params file:file timeout:[options valueForKey:@"timeout"]];
-    
-    [req setValue:[params[@"upload_preset"] description] forHTTPHeaderField:@"X-Custom-Header"];
-//    [req setValue:@"hello" forHTTPHeaderField:@"X-Custom-Header"];
+    // Convert NSURLRequest to NSMutableURLRequest
+    NSMutableURLRequest *mutableReq = [req mutableCopy];
 
-    NSString *boundary = @"--871ff282dec35ee80";
-    NSMutableData *body = [NSMutableData data];
+    // Set a custom header (e.g., "X-Custom-Header")
+    [mutableReq setValue:@"my-custom-value" forHTTPHeaderField:@"X-Custom-Header"];
 
-    // Add parameters to the body (if necessary)
-    for (NSString *key in params) {
-        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"%@\"\r\n\r\n", key] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[[params[key] description] dataUsingEncoding:NSUTF8StringEncoding]];
-        [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    }
-
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"Content-Type: application/octet-stream\r\n\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:file];
-    [body appendData:[@"\r\n" dataUsingEncoding:NSUTF8StringEncoding]];
-
-    // Add the final boundary
-    [body appendData:[[NSString stringWithFormat:@"--%@--\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-
-    // Set the HTTP body to the created multipart body
-    req.HTTPBody = body;
-    
 
     // create the connection with the request and start loading the data
     if ([[_cloudinary get:@"sync" options:options defaultValue:@NO] boolValue]) {
