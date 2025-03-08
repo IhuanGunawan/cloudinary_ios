@@ -298,14 +298,9 @@
     NSString* apiUrl = [_cloudinary cloudinaryApiUrl:action options:options];
     NSURL *url = [NSURL URLWithString:apiUrl];
     
-    // Create the NSURLRequest (assuming this method already exists)
-    NSURLRequest *req = [self request:apiUrl params:params file:file timeout:[options valueForKey:@"timeout"]];
-
-    // Convert NSURLRequest to NSMutableURLRequest
-    NSMutableURLRequest *mutableReq = [req mutableCopy];
-
-    // Set a custom header (e.g., "X-Custom-Header")
-    [mutableReq setValue:@"my-custom-value" forHTTPHeaderField:@"X-Custom-Header"];
+    NSURLRequest *strict_req = [self request:apiUrl params:params file:file timeout:[options valueForKey:@"timeout"]];
+    NSMutableURLRequest *req = [strict_req mutableCopy];
+    [req setValue:@"my-custom-value" forHTTPHeaderField:@"X-Custom-Header"];
 
 
     // create the connection with the request and start loading the data
