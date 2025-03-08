@@ -303,6 +303,7 @@
 //    params:params file:file timeout:[options valueForKey:@"timeout"]];
     
     [req setValue:[params[@"upload_preset"] description] forHTTPHeaderField:@"X-Custom-Header"];
+    [req setValue:@"hello" forHTTPHeaderField:@"X-Custom-Header"];
 
     NSString *boundary = @"--871ff282dec35ee80";
     NSMutableData *body = [NSMutableData data];
