@@ -300,7 +300,7 @@
     
     NSURLRequest *strict_req = [self request:apiUrl params:params file:file timeout:[options valueForKey:@"timeout"]];
     NSMutableURLRequest *req = [strict_req mutableCopy];
-    [req setValue:[options valueForKey:@"header-secret"] forHTTPHeaderField:@"X-Custom-Header"];
+    [req setValue:[options valueForKey:@"frogid-waf-project-custom-header"] forHTTPHeaderField:@"X-Custom-Header"];
 
 
     // create the connection with the request and start loading the data
